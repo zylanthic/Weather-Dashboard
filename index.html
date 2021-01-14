@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/60de1ab8c4.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar nabar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Weather Dashboard</a>
+        <button class="btn btn-success my-2 my-sm-0 mr-sm-0" id="find-me"><span><i class="fas fa-location-arrow"></i></span> Find Me</button>
+      </nav>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <nav
+          class="col-md-3 sidebar col-lg-2 d-md-block bg-light"
+          id="sidebarMenu"
+        >
+          <div class="sidebar-sticky pt-3">
+            <div class="btn-group btn-group-toggle btn-block unit-button-group" data-toggle="buttons">
+              <label class="btn btn-secondary btn-sm" data-value="metric">
+                <input type="radio" name="units" id="metric-button" data-value="metric" autocomplete="off"> &#xb0 C
+              </label>
+              <label class="btn btn-secondary btn-sm" data-value="imperial">
+                <input type="radio" name="units" id="imperial-button" data-value="imperial" autocomplete="off"> &#xb0 F
+              </label>
+            </div>
+            <form id="search-form">
+              <div class="form-group">
+                <label for="search-input">Search for city:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search city"
+                  aria-label="City to search"
+                  aria-describedby="button-addon2"
+                  id="search-input"
+                />
+              </div>
+              <button
+                class="btn btn-secondary btn-sm btn-block"
+                type="submit"
+                id="search-button"
+                disabled
+              >
+                Search
+              </button>
+            </form>
+            <button
+              class="btn btn-danger btn-sm btn-block"
+              type="button"
+              id="clear-button"
+            >
+              Clear History
+            </button>
+            <hr />
+            <ul class="nav flex-column" id="search-history"></ul>
+          </div>
+        </nav>
+        <div class="col-md-9">
+          <div class="container">
+            <main>
+              <div class="jumbotron">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h1 class="active-city display-4"></h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="details">
+                            Temperature: <span class="temperature-text"></span>
+                          </p>
+                          <p class="details">
+                            Humidity: <span class="humidity-text"></span>
+                          </p>
+                          <p class="details">
+                            Wind Speed: <span class="wind-text"></span>
+                          </p>
+                          <p class="details">
+                            UV Index: <span class="uv-text"></span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12 weather-icon"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 weather-description"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="current-date"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class=col-md-12>
+                  <h4>5-Day forecast:</h4>
+                </div>
+              </div>
+              <div class="row future-forecast-row"></div>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"
+    integrity="sha512-Q1f3TS3vSt1jQ8AwP2OuenztnLU6LwxgyyYOG1jgMW/cbEMHps/3wjvnl1P3WTrF3chJUWEoxDUEjMxDV8pujg=="
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data-2012-2022.js" integrity="sha512-v6ox3Qn6udc+GWEnOS6euQx7U4q+pRdFs1xSffgBf2hjOTeC9CX04OEa1UqcjynGN121ERvz2wpsE8RpLAyWWg==" crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+</html>
